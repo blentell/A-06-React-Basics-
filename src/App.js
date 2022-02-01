@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Counter from "./components/Counter";
 import Stars from "./components/Stars";
 import { useState } from "react";
-
+import {CounterContext} from './components/CounterContext'
 function App() {
 	const [counter, setCounter] = useState(0);
 
@@ -12,29 +12,36 @@ function App() {
   for (let i = 0; i < counter; i++){    
     starsArray.push(<Stars key={i}/>)
   }
+  const counterContextValue = {
+    counter,
+    setCounter,
+  };
 	return (
 		<div className="App">
 			<Header />
+			<CounterContext.Provider value={counterContextValue}>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "center",
+						marginBottom: "30px",
+					}}
+        >
+          <Counter />			
+				</div>
+			</CounterContext.Provider>
 			<div
 				style={{
 					display: "flex",
 					justifyContent: "center",
-					marginBottom: "30px",
+					flexWrap: "wrap",
+					width: "400px",
+					marginLeft: "20px",
+					marginRight: "20px",
 				}}
 			>
-				<button
-					id="remove"
-					style={{ marginRight: "30px" }}
-					onClick={() => setCounter(counter - 1)}
-				>
-					Remove
-				</button>
-				<div style={{ marginRight: "30px", fontSize: "30px" }}>{counter}</div>
-				<button id="add" onClick={() => setCounter(counter + 1)}>
-					Add
-				</button>
+				{starsArray}
 			</div>
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', width: '400px', marginLeft: '20px', marginRight: '20px'}}>{starsArray}</div>
 		</div>
 	);
 }
