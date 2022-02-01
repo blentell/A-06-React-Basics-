@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import {CounterContext} from './CounterContext'
+import { useContext} from "react";
 
-function Counter() {
-	const [counter, setCounter] = useState(0);
-
+function Counter() {	
+const { counter, setCounter } = useContext(CounterContext);
 	return (
 		<div style={{ display: "flex", justifyContent: "center", marginBottom: '30px' }}>
 			<button
